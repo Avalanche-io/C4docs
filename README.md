@@ -6,7 +6,7 @@ The C4 interface defines a set of primitives for interacting with all components
 
 These primitives are intended to be used in a variety of ways including immediate mode command line tools, language bindings for existing programming languages, C4’s own domain language, and application level frameworks.
 
-The means the C4 interface can be used to directly manipulate assets within a specific production, and can also be use to create general purpose applications for working on any production.
+This means the C4 interface can be used to directly manipulate assets within a specific production, and can also be use to create general purpose applications for working on any production.
 
 ### Motivations
 
