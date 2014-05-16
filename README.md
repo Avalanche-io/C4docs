@@ -10,6 +10,14 @@ This project it intended to outline the the basic requirements for the C4 Interf
 
 This work is being done in collaboration with the [ETC Cloud Project](https://wiki.openstack.org/wiki/Milk).
 
+## Contributing
+
+Contribution is encouraged from both programmers and non programmers who have expertise to share.  To facilitate this we uses Behavior Driven Development (BDD) and easy to understand English language descriptions of features.
+
+If you are not a programmer or not familiar with BDD then you might find this video helpful: [What is BDD and why should I care?](http://vimeo.com/72673788)
+
+Please add an [issue](https://github.com/JoshuaKolden/C4Interface/issues) if you have ideas, or fork the project and implement code that satisfies test requirements.
+
 ## Installation and requirements
 
 ## C++ Binding
@@ -29,10 +37,6 @@ This work is being done in collaboration with the [ETC Cloud Project](https://wi
     - [Cucumber](https://github.com/cucumber/cucumber)
 
 If you'd like to see other language bindings please open an issue or add your vote to an existing issue.
-
-## Contributing
-
-Use the fork / pull request workflow on github.  All are welcome.
 
 ## License
 
