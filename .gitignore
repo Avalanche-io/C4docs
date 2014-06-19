@@ -1,0 +1,51 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+# *.so
+# *.dll
+# *.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Ignore cruft
+**.dmg
+.rspec
+.rvmrc
+/.bundle
+/log/*
+/build/*
+/bin/*
+/tmp/*
+/coverage/
+/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
+.project
+
+
+*.pro.user
+*.pro.user.*
+moc_*.cpp
+qrc_*.cpp
+*-build-*
+.qmake.stash
+*.pro.user.*
+
+.test
+.specs
+.spec
+
+# Compiled Output
+assets/javascript/*.js
+spec/qml/js
+*.map
+
+#Secure Information
+inc/cpp/c4simpleCryptKey.h

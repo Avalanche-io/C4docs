@@ -4,8 +4,8 @@ Feature: Command line interface
   I want to have a command line tool
 
   Scenario: C4 command
-    When I run "c4" on the command line
-    Then I get a help message
+    When I run "bin/C4" on the command line
+    Then I get a help message with "Usage"
 
 
 

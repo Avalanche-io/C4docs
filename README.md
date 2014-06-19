@@ -27,14 +27,19 @@ Please add an [issue](https://github.com/JoshuaKolden/C4Interface/issues) if you
     - [Cucumber-cpp](https://github.com/cucumber/cucumber-cpp)
     
 ## Python Binding
+Python BDD tests are not working at the moment. Behave is not er.. behaving. See https://github.com/behave/behave/issues/233.
 
     - [python 3](https://www.python.org/)
     - [behave](https://github.com/behave/behave)
 
 ## Ruby Binding
 
-    - [Ruby 2.0](https://www.ruby-lang.org/en/)
+    - [Ruby 2.1.1](https://www.ruby-lang.org/en/)
     - [Cucumber](https://github.com/cucumber/cucumber)
+
+1. Create an rvm environment `ruby-2.1.1@c4`
+2. Run `Bundle install`.
+3. Run `cucumber`
 
 If you'd like to see other language bindings please open an issue or add your vote to an existing issue.
 

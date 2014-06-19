@@ -4,12 +4,10 @@ Feature: Asset Id
   I want to identify assets
 
   Scenario: Identifying a new asset on the command line
-    Given I have an asset called "test_image.exr"
-    When I run "c4 id test_image.exr"
-    Then I should get the id in base64
-    And get the C4 id in base58
-    And get the mime-type
-    And get the incept datestamp
+    Given I have a test image "Digital_LAD_512x389.png"
+    When I run "bin/C4 Asset id test_data/Digital_LAD_512x389.png"
+    And the command should return the address "dZHXjyH6hi9RQiLbO4q1nYPnrGMqc32KXOAETfhUv2g="
+    And the command should return the type "image/png"
 
 
 

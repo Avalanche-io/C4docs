@@ -37,13 +37,24 @@ Strong cryptography provides a security layer that offers features including end
 
 Assets are core data types that represent the media upon which the rest of the interface operates.  The obvious examples are images, video and audio, but any data can be considered an asset for a particular application.  
 
-An asset as only three values “id”, “type”, and “incept”.
+An asset as only two values _id_, _type_.  The _id_ can be represented as either a base64 `address` or a slightly more human friendly (but less precise) `c4id`
 
-**id** is a sha256 hash of the media.
+### "address"
 
-**type** is the mime type of the asset.
+The **address** is a base64 representation of the sha256 hash of the media.
+For example: "dZHXjyH6hi9RQiLbO4q1nYPnrGMqc32KXOAETfhUv2g="
 
-**incept** is the creation time stamp.
+### "c4id"
+
+The **c4id** is the sha256 hash represented in a base58 representation with commonly confused characters removed from the base64 version (`o`,`O`,`I`,`l`,`+,`/`).  These are the letter "O" lower and uppercase to avoid confusion with zero "0", upper case letter "I", and lowercase letter "L", to avoid confusion with one "1".  Plus "+" and "/" are also removed so that automatic word selection (such as double click) always includes the entire address (unlike base 64).
+
+The **c4id** can be generated at any length from 5 digits to enough digits to represent the entire address, however 10 total digits (including the "c4" prefix) is the default.
+
+The **c4id** also includes a [Damm algorithm](http://en.wikipedia.org/wiki/Damm_algorithm) check digit at the end to reduce transcription errors.
+
+### "type"
+
+The **type** is the mime type of the asset.
 
 Any additional information that is _required_ to read the asset must be contained as parameters with in the mime type.  For example image formats that do not contain line width information, etc.  
 
