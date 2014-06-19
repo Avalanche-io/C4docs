@@ -2,7 +2,7 @@
 
 This is the open source project for the C4 Interface, a standardized framework for film, television and general media content production in the cloud.
 
-For more detailed information see the [C4 Interface Specification](https://github.com/JoshuaKolden/C4/docs/spec.md).
+For more detailed information see the [C4 Interface Specification](https://github.com/JoshuaKolden/C4/blob/master/docs/spec.md).
 
 ## Project Plans
 
