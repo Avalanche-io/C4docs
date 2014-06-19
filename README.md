@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/joshuakolden/c4.png?label=ready&title=Ready)](https://waffle.io/joshuakolden/c4)
 # C4 Interface
 
 This is the open source project for the C4 Interface, a standardized framework for film, television and general media content production in the cloud.
