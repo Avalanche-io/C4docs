@@ -100,12 +100,14 @@ Here we define a user entity.
       Entity user
         full name: Joshua Kolden
         email: joshua@studiopyxis.com
-        rights
-          admin
-            Batman Begins
-            Studio Pyxis
 
-Here we create the "Studio Pyxis" entity.  Note that Studio Pyxis only means "Studio Pyxis" within this file / domain.  Within the global domain "com.studiopyxis.c4" and it's aliases would be _registered_ and have certified signing certificates from a certificate authority for validation similar to how web domains work.
+And here we find a user in the corrent domain.
+
+    bob
+      Entity find
+        email: bob@productionCompany.com
+
+Here we create the "Studio Pyxis" entity.  Note that Studio Pyxis only means "Studio Pyxis" within this file / domain.  Within the global domain "com.studiopyxis.c4" and it's aliases would be _registered_ and have certified signing certificates from a certificate authority for public validation similar to how web domains work.
 
     Studio Pyxis
       Entity company
@@ -127,6 +129,25 @@ Here we create the "Studio Pyxis" entity.  Note that Studio Pyxis only means "St
         rights
           all
             Batman Begins
+
+Then we modify the "Batman Begins" and "Studio Pyxis" symbols to give the `bob` intity spacific rights over them.
+
+    Batman Begins
+      access # give bob admin access rights
+        admin
+          bob
+      grant # give bob the right to grant admin rights to others.
+        admin
+          # or we could do it inline
+          Entity find
+            email: bob@productionCompany.com
+
+Note that after symbol resolution spaces are interpreted similarly to dot '.' in other languages to address nested symbols, so one could also use this notation: 
+
+    Studio Pyxis
+        access admin: bob
+    # or even
+    Studio Pyxis grant admin: bob
 
 # Processes 
 
