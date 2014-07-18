@@ -1,4 +1,5 @@
 # C4 Example
+
 This entire file is valid C4.  Note the use of markdown, for documentation and extended comments with formatting.
 
 C4 is a declarative language, but can invoke external processes that can be implemented in any language.  Results from these external processes must be a valid right side of a symbol definition in C4 (including json).
@@ -8,6 +9,7 @@ It can also invoke any defined symbols imperatively using an exclamation "!" aft
 A C4 file represents a network of dependencies that can be invoked to deliver a result once the network of dependencies is complete and an imperative call is made.  Once a C4 file is loaded into a domain the network persists indefinitely, or until it's definitions are removed or replaced. This allows later scripts to build from an existing network or run imperative operations through an established network.
 
 # Includes
+
 These includes specify what components of the modular interface will actually be used in this file. `io.cccc.lang.C4` includes everything as a convenience.  These can be actual c4 files to include, or already instantiated scopes within the environment. 
     
     Include io.cccc.lang.Entity     1.0
@@ -25,25 +27,20 @@ Symbols are either a concrete value such as "pi: 3.1415", or a functional defini
         print bpi($length)
       length: 200
 
-In this example `pi` is a process that is run in perl when the value of pi is needed.  Referring to this `pi` in a definition will return pi to 200 digits.  However, you could also modify the definition to include additional dependencies or values.  For example :
+In this example `pi` is a process that is run in perl when the value of pi is needed.  Referring to this `pi` in a definition will return pi to 200 digits.  However, later you could modify the definition to include additional dependencies or redefine existing ones.  For example :
 
     pi
       length: 42
 
-Here `pi` will return pi to 42 digits since the length symbol has been redefined to be 42 (but none of the rest of the pi definition has been redefined).
+Here `pi` will return pi to 42 digits since the `length` symbol the pi process uses has been redefined to be 42 (but none of the rest of the pi definition has been redefined).  This is similar to named arguments in function calls in other languages.
 
-Here we define a user entity.
+When invoking a symbol you are effectively including the definition of that symbol as if it had been written out, and potentially overriding any of the previously defined dependencies and/or adding new ones.  In the `pi` example `pi` is said to be `dependent` on `length`, so `pi` will not run until `length` is resolved.
 
-    joshua
-      Entity user
-        full name: Joshua Kolden
-        email: joshua@studiopyxis.com
-        rights
-          admin
-            Batman Begins
-            Studio Pyxis
+# Symbols, Domains, and the Dependancy Graph
 
-Symbols can be any valid utf8 string not including control characters, quotes, brackets and (':','=').  In some cases they may have to be quoted to avoid ambiguity.
+Symbol dependencies connect to create a graph of dependencies. Each Symbol represents a node in that graph. Each node may be processed in a different domain, or context within a domain.
+
+So for example a process might run on a server, return results that are digitally signed locally with your private key, and 'delivered' to another user via a process running on their laptop that copies the data from the cloud location.  These separate steps can be intuitively written in a single C4 file, but are executed in three different domains to satisfy the dependencies efficiently.
 
 In the following we create a project entity "Batman Begins" and associate various resources.  In this way we can associate processes with assets in the future and they automatically know what resources to use.
 
@@ -80,7 +77,7 @@ In the following we create a project entity "Batman Begins" and associate variou
     myMovieFile
       Process copy # copy this asset into both active and archive storage
         targets
-          Batman Begins assets active
+          Batman Begins assets archive
           Batman Begins assets active
         sources
           Asset  # define an asset explicit: 
@@ -93,7 +90,22 @@ In the following we create a project entity "Batman Begins" and associate variou
         sources
           "/show/shot/assets/movies"
 
-Here we create the Studio Pyxis entity.  Note that Studio Pyxis only means "Studio Pyxis" within this file / domain.  Within the global domain "com.studiopyxis.c4" and it's aliases would be _registered_ and have certified signing certificates from a certificate authority for validation.
+# Entities
+
+Entities are users, organizations, agents, and other 'actors' within the C4 environment. Each with specific rights and permissions over assets and resources.
+
+Here we define a user entity.
+
+    joshua
+      Entity user
+        full name: Joshua Kolden
+        email: joshua@studiopyxis.com
+        rights
+          admin
+            Batman Begins
+            Studio Pyxis
+
+Here we create the "Studio Pyxis" entity.  Note that Studio Pyxis only means "Studio Pyxis" within this file / domain.  Within the global domain "com.studiopyxis.c4" and it's aliases would be _registered_ and have certified signing certificates from a certificate authority for validation similar to how web domains work.
 
     Studio Pyxis
       Entity company
@@ -102,8 +114,8 @@ Here we create the Studio Pyxis entity.  Note that Studio Pyxis only means "Stud
             domain: db.secure.studiopyxis.com
               # in this case 'credentials' is resolved by a process that
               # is run within the given resource and computes a json object.
-              # However, this code will only run if this domain accepts
-              # the signing identity of this file:
+              # However, processes only run if the domain accepts
+              # the signing identity of the file, in this case:
               # (Joshua Kolden <joshua@studiopyxis.com>)
             credentials: Process ruby  # we return a json object using ruby
                 { username: $username,
@@ -116,19 +128,19 @@ Here we create the Studio Pyxis entity.  Note that Studio Pyxis only means "Stud
           all
             Batman Begins
 
+# Processes 
+
 Above the `production_db` resources is instructed to call a 'Process' to obtain it's credentials. Processes are declared either with the 'Process' keyword or with a "dash rocket" '->'. Immediately after the '->' (or 'Process') is the language in which the process should be interpreted and any evocation arguments.  In this case bash is called immediately because the '!' makes the directive imperative so the environment variables will be pulled from the local shell as the script is parsed.
 
 # Signatures
 
 C4 files can be signed, and services must authenticate signatures before executing code.  Signature blocks start with `Sign` and end with "Signed [entity alias]", by default a file will be signed from the beginning of the file to the signature line if a `Signed` directive is not matched to a `Sign` block.  If `Sign` is specified then only the block between `Sign` and `Signed [identity alias]` are signed.
 
-Signature blocks can be nested within other signature blocks, or any other type of block but must both be in the same block.  Also the contents of any `Include` files that are in the block are signed as well.
+Signature blocks can be nested within other signature blocks, or any other type of block but must start and end in the same block.  Also the contents of any `Include` files that are in the block are signed as well.
 
-Markdown and comments are included in the signature, but formatting is not.  In other words the 'meaning' of the file is signed, not the layout or 'look'. Incidental changes to a file such as superfluous spaces will not change the signature.
+Markdown and comments are included in the signature, but formatting is not.  In other words the 'meaning' of the file is signed, not the literal text, layout or 'look'. Incidental changes to a file such as superfluous spaces will not change the signature.
 
     Signed Joshua Kolden <joshua@studiopyxis.com>
     Signed Studio Pyxis
     
 Note decelerations can exist after the signature lines of a file but nothing after the `Signed` line is validated with that signature, so it won't run anywhere that signature is required.
-
-
