@@ -1,0 +1,83 @@
+
+From today's conversation it may not have been obvious to everyone, but I'd say that we all have the same goals and concerns in mind. The timing is perfect to sync up, and talk about what the framework really is, and how it can be useful. If it isn't useful, we want the input so that we can make it so.
+
+The framework, dubbed C4 (Cinema Content Creation Cloud), is a media production oriented SOA, mindful of the realities of production and the many participants and points of view involved. The purpose of the framework is the purpose of ETC, namely to facilitate interoperability and increase opportunities for service providers, vendors, cloud providers, production units, hardware, etc.
+
+Interoperability is really the key concept here. What C4 is not, is a specific service or commercial software offering. Under this framework, Technicolor, DFT, 5th Kind, and any other service or software provider can offer services that interoperate well. It's much more akin to http/html, than say an AWS service, or even the OpenStack framework. Although unlike HTML, it is specifically designed to minimize the opportunity cost of adoption, to the point that most established services will need do nothing at all.
+
+Where work has to be done to get the benefits of C4 is primarily products and services that have no cloud presence now at all, and we hope to make the choice between doing the costly internal development of likely incompatible interfaces vs a published standard with libraries, documentation and reference implementations, a no brainier.
+
+
+# On Herding Cats
+
+Everyone would be 100% correct to be suspicious of new frameworks, workflows, and APIs. We've all seen these types of things fail miserably in production. Each business, production, even the same department and people between two productions work in different ways and are resistant to change. Why? Because they are the expert in their field. They should be the ones defining their own workflows. This is the big failure of previous attempts to improve production workflows.  We've all seen how dictating workflows from on high never works in Hollywood, even when the same techniques have worked wonders in other industries.
+
+Specifically, one of the core ideas behind C4 is a 'tell don't ask' philosophy (a term hijacked from the agile software design movement). This means that each actor (provider or consumer) within C4 defines their own way of working and tells C4 what they expect. They aren't told what, or how to do it.
+
+We've done everything we can not to dictate workflow, other then as is generally the required standards for security and similar concerns.
+
+
+# Assets
+
+A practical example of this philosophy is the asset identification system. One approach might be to create a large name space and issue blocks of ids like domain names on the INTERNET. However, there are many problems with this approach for our industry.
+
+
+1. It dictates a system that everyone must buy into. (and all at once to get any real advantage)
+
+2. Vendor lock-in by the anointing of an 'authority' for ids.
+
+3. It is fragile since there are many situations in which an id cannot be obtained when needed.
+
+4. It is not mindful of the asynchronicity of cloud enabled workflows.
+   (The same asset could easily get multiple conflicting ids.)
+
+
+On the other hand C4's asset identification system is based on a cryptographic digest of the asset itself. This means that every asset has a unique id that can be easily computed at any time and used with a database, email communications etc.; no authority is required to generate it; a user could find the ID of an asset without any internet connection with tools that are common to every operating system; and most importantly does not force anyone to work with someone else's imposed system.
+
+Also from the ease of adoption point of view C4's asset identity approach means that piecemeal adoption is still quite valuable. The ID *is* the ID. It cannot be faked or altered, and it is forever. At anytime someone can decide to compute the ID and associate it to their own information about that asset. From this point the potential value becomes clear as the first adopter will become just a little easer to communicate with and get information from reliably. Then another vendor or production department might start using it to help sync with the first adopter etc.
+
+At no point is *everyone* required to adapt software in order for the system to be effective for those who do use it. There are some other more technical values as well such as data de-duplicaiton, transport optimization, and security. That will be documented in more detail as we continue to define the framework, and write docs. Please ask if you want more details on any of this.
+
+
+# Existing APIs
+
+The framework's domain language is a more human readable 'superset' of YAML/JSON which means that any web API in existence now that exposes a JSON interface (i.e. most of them) is already talking in C4's language. It is very easy to define a mapping from one data layout to another, and there are already myriad open source tools for converting SOAP, XML, and others to JSON.
+
+The language, like all modules of C4 is optional, but it's the design intention for it to reduce costs by making production related workflows easy to describe and reason about. Again people might be understandably concerned about having to learn a new programming language, which is exactly why it isn't a new programming language. It is a declarative way of describing workflows and plugging services together (a problem not well addressed with current technologies). When actual programming is required C4 allows you to deffer to whichever programming language you want, simply output json.
+
+This is exactly the way INTERNET APIs (SOAs) work now, with added clarity for chaining services together, media production's needs and realities, and the desire to have a simple yet elegantly designed system of interoperability that makes things easer for everyone not harder.
+
+The language allows one to define workflow, pipeline, service connections, even abstract concepts that may not have functional meaning only human meaning. It does this in a result oriented top down approach, that allows you to describe the result you want and then add ever increasing level of detail as the understanding of how to get that result becomes more clear, or more likely deffer to others to fill in the details. The domain experts define their own existing or new workflows, and other users of the framework needn't have *a priori* knowledge of APIs and interfaces to make use of them.
+
+For example a post production facility could define that it wants to receive DPX frames for shots with frame numbers and a specific unpublished internal naming convention.  While production may define it's output as monolithic ARRIRAW files with timecode, and EDLs.
+
+What happens inbetween these two phases of shot production can be completely automated perhaps as a service provided by Technicolor or 5thKind, or perhaps internally at the facility. Neither side needs to know what the the other needed or provided. This is a massive overhead and reliability win for every part of the production pipeline, and makes service offerings more accessible thereby expanding their market.
+
+The actual language is in a markdown file for easy documentation. You can find more detail and examples that demonstrate usage from different stakeholder points of view here.
+
+https://github.com/JoshuaKolden/C4/tree/master/docs/examples
+
+There are many other features, that we are working to document and build.
+
+Metadata in particular is so important that it is the bases of the language itself making it easy to encapsulate, synchronize metadata either directly via JSON or with any of the existing file formants and standards.
+
+And the list goes on:
+
+A secure by default design, that includes features for code signing and well established strong encryption standards.
+
+Identity management
+BIM like modeling for estimating workflow costs
+Distributed process management
+Transport layer abstraction
+Asset relationships (groups, lineage, versions, etc)
+Conflict resolution (that doesn't drop data)
+etc.
+
+This is a very high level description of the goals, and design so far, to help clarify thing a bit from the more technical details that we've been presenting so far. Please feel free to ask questions. I'm happy to go into more detail on any specifics, and as always please contribute, these are tools intended to be helpful.
+
+As for POC integration that's certainly an open question, it may be too many moving parts to take on in an experiment like this.  I do prefer to reduce the number of variables whenever I can.
+
+That being said, if there are solutions being developed for the framework already that are also pieces that must be built for the POC, than it's good to make sure everyone is aware of what we're working on.
+
+
+
