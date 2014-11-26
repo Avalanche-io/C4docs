@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/etcenter/c4.png?label=ready&title=Ready)](https://waffle.io/etcenter/c4)
 C4 the **Cinema Content Creation Cloud** is an open source framework for content creation using cloud resources, or in other words remote resources that come and go. Originally created by Studio Pyxis it is now open source and part of the Entertainment Technology Center's "Production in the Cloud" project serving as the "framework" component of the project.
 
 # Background
