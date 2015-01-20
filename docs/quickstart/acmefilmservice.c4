@@ -1,0 +1,66 @@
+# Acme Film Services API - V1
+
+This is the C4 definition and documentation of a hypothetical production services web app hosted at https://api.acmefilmservice.com/.  It shows how to declare and document a RESTful JSON based web API.
+
+## Account Functions
+
+This section describes account management related functions for login, logout, account creation, get and set user preferences etc.
+
+### Logging In
+The login API.
+
+    AcmeUserLogin @ POST api.acmefilmservice.com/v1/login           
+
+Successfully logging into the service will cause the API to return a session_key.  All API calls other then `AchmeUserLogin` require a valid session_key.
+
+      < session_key                                                  # 2
+        - length: 32                                                 # 3
+
+**Errors**
+
+      < error: Incorrect username or password                        # 4
+      < error: Invalid inputs                                        # 5
+      < error: Internal server error                                 # 6
+
+`username` is the account name the user decided to use when creating their Acme account.  For API functions after logging in and acquiring the session_key the username value is rarely used again.  
+
+      username >                                                     # 7
+        - length: [4-50]                                             # 8
+          error: "Usernames must be 4 to 50 characters"              # 9
+        - format                                                     # 10
+          without: /\s/                                              # 11
+          error: "Usernames may not contain any spaces."             # 12
+
+When logging in the username will be validated for length. Also `username`s may not have any spaces.
+
+In addition to the above login validations for `username` check the account creation documentation below for additional constraints on `username` enforced at creation time such as uniqueness.
+
+      password >                                                     # 13
+        - length: [1-50]                                             # 14
+
+And of course the `password` which is only validated for length. No need to give any clues why this password is wrong, just a constraint to avoid buffer overflows in the back end.
+
+### Create Account
+
+Account creation.  Much as you'd expect.  I'm not going to over document this, you get it right?
+
+    AchmeCreateUser @ POST https://api.acmefilmservice.com/v1/register
+      < "Account successfully created." 
+      username > 
+        - length: [4-50]
+          Error: "Usernames must be 4 to 50 characters"
+        - unique 
+          case sensitive: false
+          Error: "Usernames must be unique."
+        - format
+          without: /\s/
+          Error: "Usernames may not contain spaces."
+      password >
+        - length: [6-50]
+      Errors
+        - "Incorrect username or password"
+        - "Invalid input"
+        - "Username cannot be blank"
+        - "Passrod "
+
+...
