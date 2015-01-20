@@ -2,9 +2,7 @@
 
 This quick start guide introduces the key concepts of C4, for enabling interoperability between various types of production software and web service APIs. It includes examples of how to publish web service APIs in a way that can be consumed by other C4 compliant tools and services, how to 'wrap' existing software to make it C4 compliant.
 
-More information can be found at the ETC - C4 GitHub project: 
-
-https://github.com/etcenter/C4
+More information can be found at the ETC - [C4 GitHub project](https://github.com/etcenter/C4).
 
 ## C4 Interoperability Key Concepts
 
@@ -94,10 +92,10 @@ Because a C4 file is markdown a more idiomatic way to present the Acme Login ser
 
 Note the special symbols and their meaning.
 
-`<`   - Output
-`>`   - Dependency 
-`-`   - List item, or array element.
-`->`  - Function definition 
+    `<`   - Output
+    `>`   - Dependency 
+    `-`   - List item, or array element.
+    `->`  - Function definition 
 
 For example the output of this API call will be: `{session_key:"some key value"}` if the login is successful where "some key value" will always be a UTF-8 String that is exactly 32 characters long. UTF-8 String are the default representation and type so no type or representation is given.
 
