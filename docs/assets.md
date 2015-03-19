@@ -3,7 +3,7 @@
 You can generate the C4 Asset ID on most unix systems (including OSX) with the following command line.
 
 ```bash
-shasum -a 256 [FileName] | cut -f1 -d\ | xxd -r -p | base64
+shasum -a 512 [FileName] | cut -f1 -d\ | xxd -r -p | base64
 ```
 
 More examples coming very soon.
