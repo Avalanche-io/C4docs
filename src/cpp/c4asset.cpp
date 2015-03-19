@@ -54,7 +54,7 @@ void Asset::setType(const QString& type)
 
 void Asset::id(const QUrl& fileUrl)
 {
-  QCryptographicHash hasher(QCryptographicHash::Sha256);
+  QCryptographicHash hasher(QCryptographicHash::Sha512);
 
   QFile file(fileUrl.toLocalFile());
   file.open(QIODevice::ReadOnly);
