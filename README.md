@@ -40,7 +40,7 @@ For more check out the [C4 Language docs](https://github.com/etcenter/C4/blob/ma
 ### Assets
 The problem: Interoperable identification of media assets across different organizations, regardless of differences in naming conventions and without prior agreement.
 
-The solution: C4's asset identification system is based on a [cryptographic hash function](http://en.wikipedia.org/wiki/Cryptographic_hash_function) of the asset itself.  A C4 asset ID is the [SHA256](http://en.wikipedia.org/wiki/SHA-2) hash of the asset.
+The solution: C4's asset identification system is based on a [cryptographic hash function](http://en.wikipedia.org/wiki/Cryptographic_hash_function) of the asset itself.  A C4 asset ID is the [SHA512](http://en.wikipedia.org/wiki/SHA-2) hash of the asset.
 
 This hash, or "message digest" can be easily computed by any user with tools that are already available in most operating systems.  It is immutable, meaning that a given asset will **always** generate the same ID, and it is a *very large* number space meaning that no two assets will ever get the same ID.
 
