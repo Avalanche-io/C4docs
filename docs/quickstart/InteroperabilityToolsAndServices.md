@@ -16,7 +16,7 @@ C4 makes this interoperability possible via an innovative Unified Asset Address 
 
 C4 defines any digital Asset that is contained within a single file to be an **Asset**.  Collections of Assets such as a sequence of frames, or a folder of files are **Groups**.
 
-Asset have a unique ID that is a cryptographic hash of the Asset itself.  What this means is that a single unique 256 bit number is computed from all the bites that make up the Asset file.
+Asset have a unique ID that is a cryptographic hash of the Asset itself.  What this means is that a single unique 512 bit number is computed from all the bites that make up the Asset file.
 
 Asset IDs have some interesting and critical properties.
 
