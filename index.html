@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>C4 by etcenter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">C4</h1>
+      <h2 class="project-tagline">The C4 Interface</h2>
+      <a href="https://github.com/etcenter/C4" class="btn">View on GitHub</a>
+      <a href="https://github.com/etcenter/C4/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/etcenter/C4/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="c4---the-cinema-content-creation-cloud" class="anchor" href="#c4---the-cinema-content-creation-cloud" aria-hidden="true"><span class="octicon octicon-link"></span></a>C4 - The Cinema Content Creation Cloud</h1>
+
+<p><a href="https://waffle.io/etcenter/c4"><img src="https://badge.waffle.io/etcenter/c4.png?label=ready&amp;title=Ready" alt="Stories in Ready"></a> <a href="https://travis-ci.org/StudioPyxis/C4"><img src="https://travis-ci.org/StudioPyxis/C4.svg" alt="Build Status"></a></p>
+
+<p>C4 the <strong>Cinema Content Creation Cloud</strong> is an open source framework for content creation using cloud resources, or in other words remote resources that come and go. Originally created by Studio Pyxis it is now open source and part of the Entertainment Technology Center's "Production in the Cloud" project serving as the "framework" component of the project.</p>
+
+<h1>
+<a id="background" class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h1>
+
+<p>The <a href="http://www.etcenter.org">Entertainment Technology Center @ the University of Southern California (ETC)</a> has launched “Production in the Cloud,” a new project that brings together a core group of key media and cloud-resource leaders to develop guidelines and accelerate innovation and adoption of next-gen cloud-based content creation, production, and distribution tools and processes. Senior executives from the six major studios in coordination with Rackspace, EMC, EVault, Front Porch Digital, Google and many others serve as governing body to collectively guide this process. The project is looking at the life cycle of film and media production, from pre-production collaboration, production, post production and through to archiving.</p>
+
+<p>The framework is provided in this github repository.  It is designed to improve interoperability, describe workflows, and define security requirements allowing organizations, services and individuals to easily collaborate on production.</p>
+
+<p>An introductory slide deck is available at <a href="http://www.slideshare.net/JoshuaKolden/c4-framework-41598520">SlideShare</a>.</p>
+
+<p>The framework is still in development, and we encourage anyone to help improve the framework by participating and contributing.</p>
+
+<hr>
+
+<ul>
+<li>
+<a href="#The_Framework_Components">The Framework Components</a>
+
+<ul>
+<li><a href="#Interoperability">Interoperability</a></li>
+<li><a href="#Domain_Language">Language</a></li>
+<li><a href="#Asset_Identification">Assets</a></li>
+<li><a href="#Access_and_Identity">Access and Identity</a></li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="the-framework-components" class="anchor" href="#the-framework-components" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Framework Components</h2>
+
+<h3>
+<a id="interoperability" class="anchor" href="#interoperability" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interoperability</h3>
+
+<p>The C4 framework provides a low impact way for software and services to become interoperable with with other C4 services.  </p>
+
+<p>This is done by creating a C4 Language document that describes the service API, and by providing the API interface via the C4 DSL, Yaml, or JSON (there may be other format translators, such as XML in the future).</p>
+
+<p>Detailed documentation on how to do this is on it's way very shortly.</p>
+
+<h3>
+<a id="language" class="anchor" href="#language" aria-hidden="true"><span class="octicon octicon-link"></span></a>Language</h3>
+
+<p>C4 provides a Domain Specific Language (DSL) based on YAML (a superset of JSON) to describe metadata, service APIs, and workflows.  The C4 DSL makes it much easier to describe and reason about production dependencies by abstracting the lower levels of security, transport, asset identification, and resource orchestration.</p>
+
+<p>C4 adds inline markdown based comments and documentation to YAML, removes some superfluous punctuation to further improve readability, and adds the ability to define executable code in almost any programming language to be run locally or remotely.  </p>
+
+<p>For more check out the <a href="https://github.com/etcenter/C4/blob/master/docs/language.md">C4 Language docs</a> </p>
+
+<h3>
+<a id="assets" class="anchor" href="#assets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Assets</h3>
+
+<p>The problem: Interoperable identification of media assets across different organizations, regardless of differences in naming conventions and without prior agreement.</p>
+
+<p>The solution: C4's asset identification system is based on a <a href="http://en.wikipedia.org/wiki/Cryptographic_hash_function">cryptographic hash function</a> of the asset itself.  A C4 asset ID is the <a href="http://en.wikipedia.org/wiki/SHA-2">SHA512</a> hash of the asset.</p>
+
+<p>This hash, or "message digest" can be easily computed by any user with tools that are already available in most operating systems.  It is immutable, meaning that a given asset will <strong>always</strong> generate the same ID, and it is a <em>very large</em> number space meaning that no two assets will ever get the same ID.</p>
+
+<p>This ID system avoids the need for a central authority or registry to issue ids or even the need to have a network connection. Identifying assets in the fashion makes it much easier to coordinate between various production units, databases, online services.  </p>
+
+<p>Some other benefits of the C4 Asset ID system:</p>
+
+<ul>
+<li>Data De-duplication</li>
+<li>Transport Optimization </li>
+<li>Data Integrity Verification</li>
+<li>Data Signing</li>
+</ul>
+
+<p>For more see the <a href="https://github.com/etcenter/C4/blob/master/docs/assets.md">C4 Asset ID docs</a></p>
+
+<h3>
+<a id="access-and-identity" class="anchor" href="#access-and-identity" aria-hidden="true"><span class="octicon octicon-link"></span></a>Access and Identity</h3>
+
+<p>The Framework provides a <a href="">public key infrastructure</a> based access control system that allows for both distributed and federated access management.  Any individual or organization can be easily added or removed from access to projects data across multiple domains.</p>
+
+<p>The C4 Framework prescribes that <strong>all</strong> network communication is encrypted.  Both server and client are authenticated, and access can be controlled at the individual level across all participating domains.</p>
+
+<p>To achieve this the C4 security system is based on <a href="http://en.wikipedia.org/wiki/Public-key_cryptography">public key cryptography</a> and a <a href="http://en.wikipedia.org/wiki/Certificate_authority">certificate authority</a> chain based on the same technology that secures the Internet.</p>
+
+<p>Users have one or more private keys which they use to authenticate to C4 services. Private keys are kept secure by each user, and never transmitted to the server instead C4 language files are 'signed' with the private key and verified on the other end using the public key. </p>
+
+<p>This can happen in either direction, users can verify the service, and the service can verify the user. In addition to this the certificate system insures provides the ability to grant rights to data and withdraw rights at anytime across all domains.</p>
+
+<p>For example.  A studio might be a certificate authority for a given project.  They then grant rights to a production company to not only to access the production data, but also grant similar rights to it's employees. </p>
+
+<p>Now regardless of where the data resides a user who has a valid certificate from the production company can access the data.  The service providing the data need only know the studio's certificate root certificate.  Vice versa the user can verify that the service also has a certificate signed by the studio insuring that both have access to the data.</p>
+
+<p>If the user leaves the project, the production company or studio can <a href="http://en.wikipedia.org/wiki/Revocation_list">revoke</a> the user's certificate instantly removing the users access across all domains.  In fact even an entire organization could be easily revoked from the certificate chain causing that organization and all sub-orginizations or users to be revoked.</p>
+
+<h2>
+<a id="contributers" class="anchor" href="#contributers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributers</h2>
+
+<p><a href="https://github.com/JoshuaKolden">Joshua Kolden</a> - Framework Architect</p>
+
+<h2>
+<a id="project-plans" class="anchor" href="#project-plans" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project Plans</h2>
+
+<p>This project it intended to outline the the basic requirements for the C4 Framework, provide a reference client implementation, execution environment, language bindings, and a test framework to drive client development and evaluate interface compliance in new implementations.</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Contribution is encouraged from both programmers and non programmers who have expertise to share. </p>
+
+<p>Please add an <a href="https://github.com/JoshuaKolden/C4Interface/issues">issue</a> if you have ideas, or fork the project and implement code that satisfies test requirements (as more tests are setup).</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>This document, and the C4 Framework are Copyright 2014 Joshua Kolden and Studio Pyxis.</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License").  See LICENSE file for more information.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/etcenter/C4">C4</a> is maintained by <a href="https://github.com/etcenter">etcenter</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-61467513-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
+
