@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CMDNAME=`basename $0 `
+
+if test "$#" -ne 1; then
+  >&2 echo "Usage: ${CMDNAME} file"
+  >&2 echo "Computes the c4 asset id of a file and returns it base64 incoded"
+  exit 1
+fi
+
+shasum -a 512 $1 | cut -f1 -d\ | xxd -r -p | base64
