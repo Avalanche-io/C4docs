@@ -74,7 +74,11 @@ If the user leaves the project, the production company or studio can [revoke](ht
 
 ## Contributers
 
-[Joshua Kolden](https://github.com/JoshuaKolden) - Framework Architect
+- [Joshua Kolden](https://github.com/JoshuaKolden) - [Studio Pyxis](http://studiopyxis.com/)
+- [Chris Chen](www.linkedin.com/in/techexec) - [Prime Focus](http://www.primefocustechnologies.com)
+- Brandon Bussinger
+- Richard W. Kroon - [EIDER](http://eidr.org/)
+- Erik Weaver - [Entertainment Technology Center (ETC)](http://www.etcenter.org/)
 
 ## Project Plans
 
